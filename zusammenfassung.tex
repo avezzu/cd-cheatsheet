@@ -118,6 +118,109 @@
 \begin{center}
      \Large{\textbf{Compiler Design - Cheatsheet}} \\
 \end{center}
+\section{Compiler Structure}
+\subsection{Simplified Compiler Structure}
+
+\begin{align*}
+    &\text{Source Code} \rightarrow \\
+    &\underbrace{\text{Lexical Analysis}\rightarrow^{\text{Token Stream}} \text{Parsing}
+    \rightarrow^{\text{Abstract Syntax Tree}}}_{\text{Front End}} \\
+    &\underbrace{\text{Intermediate Code Generation} \rightarrow^{\text{Intermediate Code}}}_{\text{Middle End}} \\
+    &\underbrace{\text{Code Generation}}_{\text{Back End}}
+\end{align*}
+\subsection{Stack layout}
+\includegraphics[width = 0.1\textwidth]{Bilder/stack.png}
+\subsection{Suffiexes}
+\begin{enumerate}
+    \item  q = quadword (4 words)
+    \item l = long (2 words)
+    \item w = word (16-bit)
+    \item b = byte (8-bit) 
+\end{enumerate}
+\subsection{movq-instruction}
+movq $SRC$, $DST$ = $DST \leftarrow SRC$ \\
+\subsection{Flags}
+\begin{center}
+    \begin{tabular}{|c|c|} 
+     \hline
+     e (equality) & ZF is set \\ \hline
+     ne (inequality) & (not ZF) \\ \hline
+     g (greater than) & (not ZF) and (SF $=$ OF)  \\ \hline
+     l (less than) & SF $<>$ OF\\ \hline
+     ge (greater or equal) & (SF $=$ OF)  \\ \hline
+     e (less than or equal) & SF $<>$ OF or Z  \\ \hline  
+    \end{tabular}
+  \end{center}
+\subsection{Addressing}
+\begin{center}
+    \begin{tabular}{|c|c|} 
+     \hline
+     $-8$ ($\%$rsp) & rsp $–$ 8 \\ \hline
+     ($\%$rax, $\%$rcx) & rax $+$ 8$\cdot$rcx \\ \hline
+     8($\%$rax, $\%$rcx) & rax $+$ 8$\cdot$rcx + 8  \\ \hline
+    \end{tabular}
+  \end{center}
+\subsection{leaq vs. movq}
+In leaq we just compute the address, in movq we dereference the address. \\
+\subsection{Callee vs. Caller saved}
+Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
+(Rbx, R12, R13, R14, R15) are saved by the called function. \\
+\subsection{Parameter} 
+\begin{enumerate}
+    \item $1 \dots 6$: rdi, rsi, rdx, rcx, r8, r9
+    \item $7+$: on the stack (in right-to-left order), nth arg. $((n-7)+2) \cdot 8 + rbp$
+\end{enumerate}
+\subsection{Why Intermediate Representations?}
+\begin{enumerate}
+    \item resulting code quality is poor (direct translation)
+    \item Richer source language features are hard to encode (Structured data types, Objects, \dots)
+    \item hard to optimize
+    \item Control-flow is not structured
+\end{enumerate}
+\subsection{Basic Blocks}
+\begin{enumerate}
+    \item Starts with a label that names the entry point of the basic block
+    \item Ends with a control-flow instruction
+    \item Contains no other control-flow instructions
+    \item Contains no interior label used as a jump target
+\end{enumerate}
+\subsection{CFGs}
+\begin{enumerate}
+    \item Nodes are basic blocks
+    \item There is a directed edge from node A to node B if the control flow
+    instruction at the end of block A might jump to the label of block B
+    \item No two blocks have the same label
+\end{enumerate}
+\subsection{getelementptr instruction}
+The first argument is always a type used as the basis for the calculations. 
+The second argument is always a pointer or a vector of pointers, 
+and is the base address to start from. The remaining arguments are indices 
+that indicate which of the elements of the aggregate object are indexed.
+\yellow{GEP never dereferences the address it's calculating}.
+\begin{verbatim}
+struct RT {
+  char A;
+  int B[10][20];
+  char C;
+};
+struct ST {
+  int X;
+  double Y;
+  struct RT Z;
+};
+
+int *foo(struct ST *s) {
+  return &s[1].Z.B[5][13];
+}
+\end{verbatim} 
+is translated in:
+\begin{verbatim}
+    %arrayidx = getelementptr %struct.ST, ptr %s, i64 1, 
+    i32 2, i32 1, i64 5, i64 13
+    ret ptr %arrayidx
+\end{verbatim}
+
+\newpage
 
 \end{multicols}
 \end{document}
