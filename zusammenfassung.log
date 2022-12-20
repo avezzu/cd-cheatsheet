@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  19 DEC 2022 13:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  20 DEC 2022 09:37
 entering extended mode
 **"c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex"
 (c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex
@@ -748,7 +748,7 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 124.
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 124.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
-<Bilder/stack.png, id=62, 150.5625pt x 293.59688pt>
+<Bilder/stack.png, id=82, 150.5625pt x 293.59688pt>
 File: Bilder/stack.png Graphic file (type png)
 <use Bilder/stack.png>
 Package pdftex.def Info: Bilder/stack.png  used on input line 132.
@@ -762,24 +762,54 @@ Overfull \hbox (3.7701pt too wide) in paragraph at lines 221--221
 []    \OT1/cmtt/m/n/8 %arrayidx = getelementptr %struct.ST, ptr %s, i64 1,[] 
  []
 
+<Bilder/lexer_generator.png, id=84, 501.37312pt x 170.88844pt>
+File: Bilder/lexer_generator.png Graphic file (type png)
+<use Bilder/lexer_generator.png>
+Package pdftex.def Info: Bilder/lexer_generator.png  used on input line 250.
+(pdftex.def)             Requested size: 216.8122pt x 73.8978pt.
+<Bilder/rule1.png, id=85, 271.0125pt x 66.2475pt>
+File: Bilder/rule1.png Graphic file (type png)
+<use Bilder/rule1.png>
+Package pdftex.def Info: Bilder/rule1.png  used on input line 258.
+(pdftex.def)             Requested size: 216.8122pt x 53.00008pt.
+<Bilder/rule2.png, id=86, 188.20313pt x 46.67438pt>
+File: Bilder/rule2.png Graphic file (type png)
+<use Bilder/rule2.png>
+Package pdftex.def Info: Bilder/rule2.png  used on input line 259.
+(pdftex.def)             Requested size: 144.53778pt x 35.84819pt.
+<Bilder/rule3.png, id=87, 465.99094pt x 97.86563pt>
+File: Bilder/rule3.png Graphic file (type png)
+<use Bilder/rule3.png>
+Package pdftex.def Info: Bilder/rule3.png  used on input line 260.
+(pdftex.def)             Requested size: 216.8122pt x 45.5339pt.
+<Bilder/rule4.png, id=88, 484.81125pt x 193.47281pt>
+File: Bilder/rule4.png Graphic file (type png)
+<use Bilder/rule4.png>
+Package pdftex.def Info: Bilder/rule4.png  used on input line 261.
+(pdftex.def)             Requested size: 216.8122pt x 86.52466pt.
+<Bilder/rule5.png, id=89, 497.60907pt x 158.84344pt>
+File: Bilder/rule5.png Graphic file (type png)
+<use Bilder/rule5.png>
+Package pdftex.def Info: Bilder/rule5.png  used on input line 262.
+(pdftex.def)             Requested size: 216.8122pt x 69.21025pt.
 [1
 
-{C:/Users/aless/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/stack.png>] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
+{C:/Users/aless/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/stack.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/lexer_generator.png>] [2 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule1.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule2.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule3.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule4.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule5.png>] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
 Package rerunfilecheck Info: File `zusammenfassung.out' has not changed.
-(rerunfilecheck)             Checksum: 82FA944E5C686B129FE0FE2E59E39263;1885.
+(rerunfilecheck)             Checksum: 56788C2C816F82F2707E874418E3652D;2644.
  ) 
 Here is how much of TeX's memory you used:
- 23943 strings out of 479334
- 422505 string characters out of 2857085
- 739791 words of memory out of 3000000
- 40913 multiletter control sequences out of 15000+200000
- 422893 words of font info for 80 fonts, out of 3000000 for 9000
+ 24024 strings out of 479334
+ 423617 string characters out of 2857085
+ 753907 words of memory out of 3000000
+ 40955 multiletter control sequences out of 15000+200000
+ 424735 words of font info for 85 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,18n,89p,504b,522s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (1 page, 120338 bytes).
+ 87i,18n,89p,504b,524s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (2 pages, 224548 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 199 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
+ 200 words of extra memory for PDF output out of 10000 (max. 10000000)
 

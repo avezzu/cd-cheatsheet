@@ -219,7 +219,60 @@ is translated in:
     i32 2, i32 1, i64 5, i64 13
     ret ptr %arrayidx
 \end{verbatim}
-
+\subsection*{Regular Expressions}
+Regular expressions precisely describe sets of strings. A regular expression R has one of the following forms:
+\begin{enumerate}
+  \item $\epsilon$: Epsilon stands for the empty string
+  \item $'a'$: An ordinary character stands for itself
+  \item $R_1 | R_2$: Alternatives, stands for choice of $R_1$ or $R_2$
+  \item $R_1 R_2$: Concatenation, stands for $R_1$ followed by $R_2$
+  \item $R^*$: Kleene star, stands for zero or more repetitions of $R$
+\end{enumerate}
+Useful extensions:
+\begin{enumerate}
+  \item "$foo$": Strings, equivalent to $'f'$ $'o'$ $'o'$
+  \item $R^+$: One or more repetitions of $R$, equivalent to $RR^*$
+  \item $R$?: Zero or one occurrences of $R$, equivalent to $(\epsilon|R)$
+  \item $['a'-'z']$: One of $a$ or $b$ or $c$ or \dots $z$, equivalent to $(a|b|\dots|z)$
+  \item $[\text{ }\Hat{ }\text{  }'0'-'9']$: Any character except $0$ through $9$
+  \item $R$ as $x$: Name the string matched by $R$ as $x$
+\end{enumerate}
+\subsection{Chomsky Hierarchy}
+Regular $\subset$ Context-Free $\subset$ Context Sensitive $\subset$ Recursively Enumerable \\
+\subsection{Matching Rule for Lexer}
+Most languages choose “longest match”.
+\subsection{Lexer Generator}
+\begin{enumerate}
+  \item Reads a list of regular expressions: $R_1,\dots,R_n$ , one per token
+  \item Each token has an attached “action” $A_i$ (just a piece of code to run
+  when the regular expression is matched)  
+\end{enumerate}
+\includegraphics[width = 0.3\textwidth]{Bilder/lexer_generator.png}
+Generates scanning code that:
+\begin{enumerate}
+  \item Decides whether the input is of the form $(R_1|\dots|R_n)^*$
+  \item After matching a (longest) token, runs the associated action 
+\end{enumerate}
+\subsection{Implementation Strategies}
+We can use a finite automaton since one must exist for a regular expression.
+\includegraphics[width = 0.3\textwidth]{Bilder/rule1.png}
+\includegraphics[width = 0.2\textwidth]{Bilder/rule2.png}
+\includegraphics[width = 0.3\textwidth]{Bilder/rule3.png}
+\includegraphics[width = 0.3\textwidth]{Bilder/rule4.png}
+\includegraphics[width = 0.3\textwidth]{Bilder/rule5.png}
+\subsection{DFA vs. NFA}
+DFA:
+\begin{enumerate}
+  \item Action of the automaton for each input is fully determined
+  \item Accepts if the input is consumed upon reaching an accepting state
+  \item Obvious table-based implementation
+\end{enumerate}
+NFA:
+\begin{enumerate}
+  \item Automaton potentially has a choice at every step
+  \item Accepts an input if there exists a way to reach an accepting state
+  \item Less obvious how to implement efficiently
+\end{enumerate}
 \newpage
 
 \end{multicols}
