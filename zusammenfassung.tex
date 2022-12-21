@@ -161,63 +161,63 @@ movq $SRC$, $DST$ = $DST \leftarrow SRC$ \\
   \end{center}
 \subsection{leaq vs. movq}
 In leaq we just compute the address, in movq we dereference the address. \\
-\subsection{Callee vs. Caller saved}
-Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
-(Rbx, R12, R13, R14, R15) are saved by the called function. \\
-\subsection{Parameter} 
-\begin{enumerate}
-    \item $1 \dots 6$: rdi, rsi, rdx, rcx, r8, r9
-    \item $7+$: on the stack (in right-to-left order), nth arg. $((n-7)+2) \cdot 8 + rbp$
-\end{enumerate}
-\subsection{Why Intermediate Representations?}
-\begin{enumerate}
-    \item resulting code quality is poor (direct translation)
-    \item Richer source language features are hard to encode (Structured data types, Objects, \dots)
-    \item hard to optimize
-    \item Control-flow is not structured
-\end{enumerate}
-\subsection{Basic Blocks}
-\begin{enumerate}
-    \item Starts with a label that names the entry point of the basic block
-    \item Ends with a control-flow instruction
-    \item Contains no other control-flow instructions
-    \item Contains no interior label used as a jump target
-\end{enumerate}
-\subsection{CFGs}
-\begin{enumerate}
-    \item Nodes are basic blocks
-    \item There is a directed edge from node A to node B if the control flow
-    instruction at the end of block A might jump to the label of block B
-    \item No two blocks have the same label
-\end{enumerate}
+%\subsection{Callee vs. Caller saved}
+%Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
+%(Rbx, R12, R13, R14, R15) are saved by the called function. \\
+%\subsection{Parameter} 
+%\begin{enumerate}
+%    \item $1 \dots 6$: rdi, rsi, rdx, rcx, r8, r9
+%    \item $7+$: on the stack (in right-to-left order), nth arg. $((n-7)+2) \cdot 8 + rbp$
+%\end{enumerate}
+%\subsection{Why Intermediate Representations?}
+%\begin{enumerate}
+%    \item resulting code quality is poor (direct translation)
+%    \item Richer source language features are hard to encode (Structured data types, Objects, \dots)
+%    \item hard to optimize
+%    \item Control-flow is not structured
+%\end{enumerate}
+%\subsection{Basic Blocks}
+%\begin{enumerate}
+%    \item Starts with a label that names the entry point of the basic block
+%    \item Ends with a control-flow instruction
+%    \item Contains no other control-flow instructions
+%    \item Contains no interior label used as a jump target
+%\end{enumerate}
+%\subsection{CFGs}
+%\begin{enumerate}
+%    \item Nodes are basic blocks
+%    \item There is a directed edge from node A to node B if the control flow
+%    instruction at the end of block A might jump to the label of block B
+%    \item No two blocks have the same label
+%\end{enumerate}
 \subsection{getelementptr instruction}
 The first argument is always a type used as the basis for the calculations. 
 The second argument is always a pointer or a vector of pointers, 
 and is the base address to start from. The remaining arguments are indices 
 that indicate which of the elements of the aggregate object are indexed.
 \yellow{GEP never dereferences the address it's calculating}.
-\begin{verbatim}
-struct RT {
-  char A;
-  int B[10][20];
-  char C;
-};
-struct ST {
-  int X;
-  double Y;
-  struct RT Z;
-};
-
-int *foo(struct ST *s) {
-  return &s[1].Z.B[5][13];
-}
-\end{verbatim} 
-is translated in:
-\begin{verbatim}
-    %arrayidx = getelementptr %struct.ST, ptr %s, i64 1, 
-    i32 2, i32 1, i64 5, i64 13
-    ret ptr %arrayidx
-\end{verbatim}
+%\begin{verbatim}
+%struct RT {
+%  char A;
+%  int B[10][20];
+%  char C;
+%};
+%struct ST {
+%  int X;
+%  double Y;
+%  struct RT Z;
+%};
+%
+%int *foo(struct ST *s) {
+%  return &s[1].Z.B[5][13];
+%}
+%\end{verbatim} 
+%is translated in:
+%\begin{verbatim}
+%    %arrayidx = getelementptr %struct.ST, ptr %s, i64 1, 
+%    i32 2, i32 1, i64 5, i64 13
+%    ret ptr %arrayidx
+%\end{verbatim}
 \subsection*{Regular Expressions}
 Regular expressions precisely describe sets of strings. A regular expression R has one of the following forms:
 \begin{enumerate}
@@ -288,8 +288,8 @@ A Context-free Grammar (CFG) consists of
 \textbf{single step:} For arbitrary strings $\alpha, \beta, \gamma$ and production rule $A \mapsto \beta$ a single step of the derivation is
 $\alpha A \gamma \mapsto \alpha \beta \gamma$ \\
 \textbf{ Parse Tree:} Leaves are terminals and Internal nodes are nonterminals.\\
-\subsection{Parse Trees to Abstract Syntax}
-\includegraphics[width = 0.3\textwidth]{Bilder/parse_tree_ast.png}
+%\subsection{Parse Trees to Abstract Syntax}
+%\includegraphics[width = 0.3\textwidth]{Bilder/parse_tree_ast.png}
 \subsection{Derivation Orders}
 Productions of the grammar can be applied in any order. Both strategies (and any other) yield the \yellow{same} parse tree!
 \begin{enumerate}
@@ -517,8 +517,112 @@ and not contravariant because of
 Objects contain a pointer to a dispatch vector (also called a virtual table or vtable) with pointers to method code \\
 \textbf{Single Inheritance:} every method has its own small integer index, Index is used to look up the method in the dispatch vector. Each interface and class gives rise to a dispatch vector layout. DV layout of new method is appended to the class which is being extended\\
 \includegraphics[width = 0.2\textwidth]{Bilder/dv_layout.png}\\
-
-
+\textbf{Multiple Inheritance:} Multiple Inheritance approaches: Allow multiple DV tables (C++) Choose which DV to use based on 
+static types, casting requires runtime operations; Use a level of indirection: Map method identifiers to code pointers 
+using a hash table, search up through the class hierarchy; Give up separate compilation: Now we have access to the whole class hierarchy. Use sparse dispatch vectors or 
+binary decision trees.
+\subsection{Optimization}
+An optimization must always be safe i.e. it must not change the behavior of the program.
+\begin{itemize}
+	\item Problem: many optimizations trade space for time (e.g. Loop unrolling)
+	\item Constant Folding: If operands are statically known, compute value at compile-time (has to preformed at every stage of optimization - constant expressions can be created by translation or earlier optimizations / can enable further optimizations). Also: Algebraic Simplification (Use mathematical identities e.g $a \cdot 1 \rightarrow a$)
+	\item Copy Propagation: For x = y replace uses of x with y
+	\item Dead Code Elimination: If side-effect free code can never be observed, safe to eliminate it
+	\item Inlining: Replace a function call with the body of the function (arguments are rewritten)
+	\item Code Specialization: Create Specialized versions of a function that is called form different places with different arguments.
+	\item Common Subexpression Elimination: In some sense, it is the opposite of inlining: fold redundant computations together
+	\item Loop Optimizations
+	\begin{itemize}
+		\item Hot spots often occur in loops (esp. inner loops)
+		\item Loop Invariant Code Motion
+		\item Strength Reduction (replace expensive ops by cheap ones by creating a dependent induction variable)
+		\item Loop unrolling
+	\end{itemize}
+\end{itemize}
+\subsection{Code Analysis}
+Algorithm for Dataflow Analysis:
+\begin{verbatim}
+  let w = new set with all nodes
+  repeat until w is empty
+    let n = w.pop()
+    old_out = out[n]
+    let in = combine(preds[n])
+    out[n] := flow[n](in)
+    if (!equal old_out out[n]),
+      for all m in succs[n], w.add(m)
+end
+\end{verbatim}
+\begin{itemize}
+	\item Liveness
+	\begin{itemize}
+		\item Observation: uid1 and uid2 can be assigned to the same register if their values will not be needed at the same time. Liveness property is more fine grained than scope.
+		\item Variable v is live at a program point L if v is defined before L and v is used after L
+		\item Liveness analysis is one example of dataflow analysis: A variable $v$ is live on edge $e$ if there is a node n in the CFG such that use[n] contains $v$ and a directed path from e to n such that for every statement $s'$ on the path def[$s'$] does not contain $v$
+		\item Dataflow: Compute information for all variables simultaneously. Solve the equations by iteratively converging on a solution: Start with a rough approximation to the answer, refine the answer at each iteration, keep going until nor more refinement is possible.
+		\end{itemize}
+		\end{itemize}
+	  \textbf{Liveness:} backward, may $(out[n] = \bigcup_{n' \in succ[n]} in[n'], in[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = use[n], kill[n] = def[n]$\\
+		\textbf{Reaching Definition:} (for Constant and Copy propagation)forward, may $(in[n] = \bigcup_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = \{n\}, kill[n] = defs[a]\setminus \{n\}$\\
+		\textbf{Available Expressions:} forward (replace expression with res e.g. a = x + 1, b = x + 1 $\rightarrow$ b = a), must $(in[n] = \bigcap_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = \{n\} \setminus kill[n], kill[n] = uses[a]$\\
+    \textbf{Very Busy Expressions:} Expression e is very busy at location p if every path from p
+    must evaluate e before any variable in e is redefined, background, must $(out[n] = \bigcap_{n' \in pred[n]} out[n'], in = gen union (out \setminus kill))$\\
+		Key idea: Iterative solution of a system of equations over a lattice. Iteration terminates if flow functions are monotonic, equivalent to the MOP answer if flow functions distribute over meet
+\subsection{Register Allocation}
+\textbf{Linear-Scan Register:} Compute liveness information for each temp, try to use a reg if not possible than spill
+\begin{itemize}
+	\item Register Allocation: Compute liveness information for each temp, create an infereence graph, try to color the graph.
+	\item Kempe: 1. Find a node with degree < k and cut it out of the graph, 2. Recursively k-color the remaining subgraph, 3. When remaining graph is colored, there must be at least one free color available for the deleted node. If the graph cannot be colored we spill that node.
+	\item Precolored nodes: Certain variables must be pre-assigned to registers (call, imul, caller-save registers)
+\end{itemize}
+\textbf{Coalescing Interference Graphs:} A more aggressive strategy is to coalesce nodes of the interference
+graph if they are connected by move-related edges (if t1 and t2 in movq t1, t2 can be assigned the same register (color)) this move is
+redundant and can be eliminated\\
+\textbf{Brigg's strategy:} It's safe to coalesce x \& y if the resulting node will have fewer than k neighbors that have degree >= k. \\
+\textbf{George's strategy:} We can safely coalesce x \& y if for every neighbor t of x, either t already interferes with y or t has degree < k.
+\subsection{Loops}
+Identify loops \& nesting structure in a CFG
+\begin{itemize}
+	\item A loop is a strongly connected component (head reachable from each node)
+	\item Concept of dominators: A dominates B = if the only way to reach B from start node is via A. A loop contains at least 1 back edge. (back edge = target dominates the source)
+	\item dom is transitive and anti-symmetric, can be computed as a forward dataflow analysis $in[n] = \bigcap_{n' \in pred[n]}out[n'], out[n] = in[n] \cup \{n\}, \bigsqcap = \cap$
+\end{itemize}
+\subsection{Single Static Assignment (SSA)}
+\begin{itemize}
+  \item \%uids on RHS of phi nodes can be defined “later” in CFG
+  \item An alloca inst. is promotable if the address of the variable is not taken or is not passed by reference
+  \item $\phi$ nodes can be placed at dominator tree join nodes
+	\item eliminate phi nodes after optmization
+\end{itemize}
+Algorithm For Computing Dominance Frontiers:
+\begin{verbatim}
+  for all nodes B
+    if #(pred[B]) >= 2             // (just an optimization)
+      for each p in pred[B] {
+        runner := p        // start at the predecessor of B
+        while (runner != doms[B])  // walk up the tree adding B
+          DF[runner] := DF[runner] union {B}
+          runner := doms[runner]
+      }
+\end{verbatim}
+\subsection{Garbage Collector}
+\begin{itemize}
+	\item Garbage: An object x is reachable iff a register contains a pointer to x or another reachable object y contains a pointer to x
+	\item reachable objects can be found by starting from registers and following all pointers
+  \item Mark and Sweep
+	
+	When memory runs out, GC executes two phases: mark phase: trace reachable objects; sweep phase: collects garbage objects (extra bit reserved for memory management)
+	
+	pointer reversal can be used to allow auxiliary data to be stored in the objects.
+	\item Stop and Copy
+	
+	Memory is organized into two areas: Old space (used for allocation), new space (use as a reserve for GC)
+	
+	When old space is full all reachable objects are moved, old and new are swapped.
+	\item Reference Counting
+	
+	Store number of references in the object itself, assignments modify that number. Cannot collect circular structures.
+	
+\end{itemize}
 \newpage
 \end{multicols}
 \end{document}

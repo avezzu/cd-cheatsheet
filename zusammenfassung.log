@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  21 DEC 2022 10:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  21 DEC 2022 11:56
 entering extended mode
 **"c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex"
 (c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex
@@ -757,11 +757,6 @@ Package pdftex.def Info: Bilder/stack.png  used on input line 131.
 
 LaTeX Warning: Command \textendash invalid in math mode on input line 157.
 
-
-Overfull \hbox (3.7701pt too wide) in paragraph at lines 220--220
-[]    \OT1/cmtt/m/n/8 %arrayidx = getelementptr %struct.ST, ptr %s, i64 1,[] 
- []
-
 <Bilder/lexer_generator.png, id=156, 501.37312pt x 170.88844pt>
 File: Bilder/lexer_generator.png Graphic file (type png)
 <use Bilder/lexer_generator.png>
@@ -775,17 +770,12 @@ Package pdftex.def Info: Bilder/nfas.png  used on input line 257.
 [1
 
 {C:/Users/aless/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/stack.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/lexer_generator.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/nfas.png>]
-<Bilder/parse_tree_ast.png, id=208, 471.26062pt x 347.04657pt>
-File: Bilder/parse_tree_ast.png Graphic file (type png)
-<use Bilder/parse_tree_ast.png>
-Package pdftex.def Info: Bilder/parse_tree_ast.png  used on input line 292.
-(pdftex.def)             Requested size: 216.8122pt x 159.66454pt.
-<Bilder/left_factor.png, id=209, 453.94594pt x 103.88812pt>
+<Bilder/left_factor.png, id=210, 453.94594pt x 103.88812pt>
 File: Bilder/left_factor.png Graphic file (type png)
 <use Bilder/left_factor.png>
 Package pdftex.def Info: Bilder/left_factor.png  used on input line 323.
 (pdftex.def)             Requested size: 144.53778pt x 33.07843pt.
-<Bilder/elemination_left_rec.png, id=210, 462.22687pt x 88.83188pt>
+<Bilder/elemination_left_rec.png, id=211, 462.22687pt x 88.83188pt>
 File: Bilder/elemination_left_rec.png Graphic file (type png)
 <use Bilder/elemination_left_rec.png>
 Package pdftex.def Info: Bilder/elemination_left_rec.png  used on input line 328.
@@ -802,38 +792,38 @@ LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbraceleft' on input line 343.
 
-<Bilder/parse_table_ll.png, id=211, 509.65407pt x 130.98938pt>
+<Bilder/parse_table_ll.png, id=212, 509.65407pt x 130.98938pt>
 File: Bilder/parse_table_ll.png Graphic file (type png)
 <use Bilder/parse_table_ll.png>
 Package pdftex.def Info: Bilder/parse_table_ll.png  used on input line 351.
 (pdftex.def)             Requested size: 216.8122pt x 55.7247pt.
-<Bilder/shift_reduce.png, id=212, 487.8225pt x 97.86563pt>
+<Bilder/shift_reduce.png, id=213, 487.8225pt x 97.86563pt>
 File: Bilder/shift_reduce.png Graphic file (type png)
 <use Bilder/shift_reduce.png>
 Package pdftex.def Info: Bilder/shift_reduce.png  used on input line 364.
 (pdftex.def)             Requested size: 216.8122pt x 43.49704pt.
-[2 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_tree_ast.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/left_factor.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/elemination_left_rec.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_ll.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/shift_reduce.png>]
-<Bilder/dfa_lr.png, id=255, 476.53032pt x 324.46219pt>
+<Bilder/dfa_lr.png, id=214, 476.53032pt x 324.46219pt>
 File: Bilder/dfa_lr.png Graphic file (type png)
 <use Bilder/dfa_lr.png>
 Package pdftex.def Info: Bilder/dfa_lr.png  used on input line 378.
 (pdftex.def)             Requested size: 144.53778pt x 98.41374pt.
-<Bilder/parse_table_lr.png, id=256, 608.2725pt x 168.63pt>
+<Bilder/parse_table_lr.png, id=215, 608.2725pt x 168.63pt>
 File: Bilder/parse_table_lr.png Graphic file (type png)
 <use Bilder/parse_table_lr.png>
 Package pdftex.def Info: Bilder/parse_table_lr.png  used on input line 382.
 (pdftex.def)             Requested size: 216.8122pt x 60.10464pt.
-<Bilder/dfa_lr1.png, id=257, 342.5297pt x 245.41687pt>
+<Bilder/dfa_lr1.png, id=216, 342.5297pt x 245.41687pt>
 File: Bilder/dfa_lr1.png Graphic file (type png)
 <use Bilder/dfa_lr1.png>
 Package pdftex.def Info: Bilder/dfa_lr1.png  used on input line 411.
 (pdftex.def)             Requested size: 72.2744pt x 51.78247pt.
-<Bilder/closure_array_based.png, id=258, 410.2828pt x 260.47313pt>
+[2 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/left_factor.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/elemination_left_rec.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_ll.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/shift_reduce.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr1.png>]
+<Bilder/closure_array_based.png, id=257, 410.2828pt x 260.47313pt>
 File: Bilder/closure_array_based.png Graphic file (type png)
 <use Bilder/closure_array_based.png>
 Package pdftex.def Info: Bilder/closure_array_based.png  used on input line 471.
 (pdftex.def)             Requested size: 144.53778pt x 91.75916pt.
- [3 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr1.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/closure_array_based.png>]
+
 Overfull \hbox (12.27022pt too wide) in paragraph at lines 503--503
 []    \OT1/cmtt/m/n/8 Int ref a = r; (* OK because NonZero ref <: Int ref *)[] 
  []
@@ -843,30 +833,45 @@ Overfull \hbox (8.02016pt too wide) in paragraph at lines 503--503
 []    \OT1/cmtt/m/n/8 return (42 / !r) (* OK because !r has type NonZero *)[] 
  []
 
-<Bilder/dv_layout.png, id=284, 335.75438pt x 203.25937pt>
+<Bilder/dv_layout.png, id=258, 335.75438pt x 203.25937pt>
 File: Bilder/dv_layout.png Graphic file (type png)
 <use Bilder/dv_layout.png>
 Package pdftex.def Info: Bilder/dv_layout.png  used on input line 519.
 (pdftex.def)             Requested size: 144.53778pt x 87.49907pt.
-[4 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dv_layout.png>] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
+[3 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/closure_array_based.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dv_layout.png>]
+Overfull \hbox (20.77034pt too wide) in paragraph at lines 606--606
+[]    \OT1/cmtt/m/n/8 if #(pred[B]) >= 2             // (just an optimization)[] 
+ []
+
+
+Overfull \hbox (16.52028pt too wide) in paragraph at lines 606--606
+[]        \OT1/cmtt/m/n/8 runner := p        // start at the predecessor of B[] 
+ []
+
+
+Overfull \hbox (33.52052pt too wide) in paragraph at lines 606--606
+[]        \OT1/cmtt/m/n/8 while (runner != doms[B])  // walk up the tree adding B[] 
+ []
+
+[4] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `zusammenfassung.out' has not changed.
-(rerunfilecheck)             Checksum: B9597B7AF1632C416812394A9F5DA659;5287.
+(rerunfilecheck)             Checksum: B2B1CC723689FFBB4E7FD60C4580E446;5207.
  ) 
 Here is how much of TeX's memory you used:
- 24189 strings out of 479334
- 426113 string characters out of 2857085
- 755132 words of memory out of 3000000
- 41037 multiletter control sequences out of 15000+200000
- 427503 words of font info for 91 fonts, out of 3000000 for 9000
+ 24171 strings out of 479334
+ 425867 string characters out of 2857085
+ 757488 words of memory out of 3000000
+ 41032 multiletter control sequences out of 15000+200000
+ 427760 words of font info for 92 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,18n,89p,504b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 87i,18n,89p,504b,639s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/hoekwater/stmary8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (4 pages, 469472 bytes).
+Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (4 pages, 441282 bytes).
 PDF statistics:
- 359 PDF objects out of 1000 (max. 8388607)
- 128 named destinations out of 1000 (max. 500000)
- 374 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 342 PDF objects out of 1000 (max. 8388607)
+ 115 named destinations out of 1000 (max. 500000)
+ 369 words of extra memory for PDF output out of 10000 (max. 10000000)
 
