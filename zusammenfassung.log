@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  20 DEC 2022 09:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.3.9)  21 DEC 2022 10:05
 entering extended mode
 **"c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex"
 (c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/zusammenfassung.tex
@@ -718,98 +718,155 @@ LaTeX Info: Redefining \nameref on input line 104.
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
 )
-LaTeX Font Info:    Trying to load font information for OML+zplm on input line 124.
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 123.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 124.
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 123.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 124.
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 123.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 124.
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 123.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 124.
+(Font)              scaled to size 8.33606pt on input line 123.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 124.
+(Font)              scaled to size 6.25204pt on input line 123.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 124.
+(Font)              scaled to size 5.21004pt on input line 123.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 124.
+(Font)              scaled to size 8.33606pt on input line 123.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 124.
+(Font)              scaled to size 6.25204pt on input line 123.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 124.
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 124.
+(Font)              scaled to size 5.21004pt on input line 123.
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 123.
  (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
-<Bilder/stack.png, id=82, 150.5625pt x 293.59688pt>
+<Bilder/stack.png, id=154, 293.59688pt x 150.5625pt>
 File: Bilder/stack.png Graphic file (type png)
 <use Bilder/stack.png>
-Package pdftex.def Info: Bilder/stack.png  used on input line 132.
-(pdftex.def)             Requested size: 72.2744pt x 140.93832pt.
+Package pdftex.def Info: Bilder/stack.png  used on input line 131.
+(pdftex.def)             Requested size: 144.53778pt x 74.12086pt.
 
 
-LaTeX Warning: Command \textendash invalid in math mode on input line 158.
+LaTeX Warning: Command \textendash invalid in math mode on input line 157.
 
 
-Overfull \hbox (3.7701pt too wide) in paragraph at lines 221--221
+Overfull \hbox (3.7701pt too wide) in paragraph at lines 220--220
 []    \OT1/cmtt/m/n/8 %arrayidx = getelementptr %struct.ST, ptr %s, i64 1,[] 
  []
 
-<Bilder/lexer_generator.png, id=84, 501.37312pt x 170.88844pt>
+<Bilder/lexer_generator.png, id=156, 501.37312pt x 170.88844pt>
 File: Bilder/lexer_generator.png Graphic file (type png)
 <use Bilder/lexer_generator.png>
-Package pdftex.def Info: Bilder/lexer_generator.png  used on input line 250.
+Package pdftex.def Info: Bilder/lexer_generator.png  used on input line 249.
 (pdftex.def)             Requested size: 216.8122pt x 73.8978pt.
-<Bilder/rule1.png, id=85, 271.0125pt x 66.2475pt>
-File: Bilder/rule1.png Graphic file (type png)
-<use Bilder/rule1.png>
-Package pdftex.def Info: Bilder/rule1.png  used on input line 258.
-(pdftex.def)             Requested size: 216.8122pt x 53.00008pt.
-<Bilder/rule2.png, id=86, 188.20313pt x 46.67438pt>
-File: Bilder/rule2.png Graphic file (type png)
-<use Bilder/rule2.png>
-Package pdftex.def Info: Bilder/rule2.png  used on input line 259.
-(pdftex.def)             Requested size: 144.53778pt x 35.84819pt.
-<Bilder/rule3.png, id=87, 465.99094pt x 97.86563pt>
-File: Bilder/rule3.png Graphic file (type png)
-<use Bilder/rule3.png>
-Package pdftex.def Info: Bilder/rule3.png  used on input line 260.
-(pdftex.def)             Requested size: 216.8122pt x 45.5339pt.
-<Bilder/rule4.png, id=88, 484.81125pt x 193.47281pt>
-File: Bilder/rule4.png Graphic file (type png)
-<use Bilder/rule4.png>
-Package pdftex.def Info: Bilder/rule4.png  used on input line 261.
-(pdftex.def)             Requested size: 216.8122pt x 86.52466pt.
-<Bilder/rule5.png, id=89, 497.60907pt x 158.84344pt>
-File: Bilder/rule5.png Graphic file (type png)
-<use Bilder/rule5.png>
-Package pdftex.def Info: Bilder/rule5.png  used on input line 262.
-(pdftex.def)             Requested size: 216.8122pt x 69.21025pt.
+<Bilder/nfas.png, id=157, 808.52063pt x 277.035pt>
+File: Bilder/nfas.png Graphic file (type png)
+<use Bilder/nfas.png>
+Package pdftex.def Info: Bilder/nfas.png  used on input line 257.
+(pdftex.def)             Requested size: 216.8122pt x 74.28896pt.
 [1
 
-{C:/Users/aless/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/stack.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/lexer_generator.png>] [2 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule1.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule2.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule3.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule4.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/rule5.png>] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
+{C:/Users/aless/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/stack.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/lexer_generator.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/nfas.png>]
+<Bilder/parse_tree_ast.png, id=208, 471.26062pt x 347.04657pt>
+File: Bilder/parse_tree_ast.png Graphic file (type png)
+<use Bilder/parse_tree_ast.png>
+Package pdftex.def Info: Bilder/parse_tree_ast.png  used on input line 292.
+(pdftex.def)             Requested size: 216.8122pt x 159.66454pt.
+<Bilder/left_factor.png, id=209, 453.94594pt x 103.88812pt>
+File: Bilder/left_factor.png Graphic file (type png)
+<use Bilder/left_factor.png>
+Package pdftex.def Info: Bilder/left_factor.png  used on input line 323.
+(pdftex.def)             Requested size: 144.53778pt x 33.07843pt.
+<Bilder/elemination_left_rec.png, id=210, 462.22687pt x 88.83188pt>
+File: Bilder/elemination_left_rec.png Graphic file (type png)
+<use Bilder/elemination_left_rec.png>
+Package pdftex.def Info: Bilder/elemination_left_rec.png  used on input line 328.
+(pdftex.def)             Requested size: 144.53778pt x 27.7775pt.
+LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 343.
+ (C:\Users\aless\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1pplx.fd
+File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
+)
+LaTeX Font Info:    Trying to load font information for OMS+pplx on input line 343.
+LaTeX Font Info:    No file OMSpplx.fd. on input line 343.
+
+
+LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 343.
+
+<Bilder/parse_table_ll.png, id=211, 509.65407pt x 130.98938pt>
+File: Bilder/parse_table_ll.png Graphic file (type png)
+<use Bilder/parse_table_ll.png>
+Package pdftex.def Info: Bilder/parse_table_ll.png  used on input line 351.
+(pdftex.def)             Requested size: 216.8122pt x 55.7247pt.
+<Bilder/shift_reduce.png, id=212, 487.8225pt x 97.86563pt>
+File: Bilder/shift_reduce.png Graphic file (type png)
+<use Bilder/shift_reduce.png>
+Package pdftex.def Info: Bilder/shift_reduce.png  used on input line 364.
+(pdftex.def)             Requested size: 216.8122pt x 43.49704pt.
+[2 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_tree_ast.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/left_factor.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/elemination_left_rec.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_ll.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/shift_reduce.png>]
+<Bilder/dfa_lr.png, id=255, 476.53032pt x 324.46219pt>
+File: Bilder/dfa_lr.png Graphic file (type png)
+<use Bilder/dfa_lr.png>
+Package pdftex.def Info: Bilder/dfa_lr.png  used on input line 378.
+(pdftex.def)             Requested size: 144.53778pt x 98.41374pt.
+<Bilder/parse_table_lr.png, id=256, 608.2725pt x 168.63pt>
+File: Bilder/parse_table_lr.png Graphic file (type png)
+<use Bilder/parse_table_lr.png>
+Package pdftex.def Info: Bilder/parse_table_lr.png  used on input line 382.
+(pdftex.def)             Requested size: 216.8122pt x 60.10464pt.
+<Bilder/dfa_lr1.png, id=257, 342.5297pt x 245.41687pt>
+File: Bilder/dfa_lr1.png Graphic file (type png)
+<use Bilder/dfa_lr1.png>
+Package pdftex.def Info: Bilder/dfa_lr1.png  used on input line 411.
+(pdftex.def)             Requested size: 72.2744pt x 51.78247pt.
+<Bilder/closure_array_based.png, id=258, 410.2828pt x 260.47313pt>
+File: Bilder/closure_array_based.png Graphic file (type png)
+<use Bilder/closure_array_based.png>
+Package pdftex.def Info: Bilder/closure_array_based.png  used on input line 471.
+(pdftex.def)             Requested size: 144.53778pt x 91.75916pt.
+ [3 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/parse_table_lr.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dfa_lr1.png> <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/closure_array_based.png>]
+Overfull \hbox (12.27022pt too wide) in paragraph at lines 503--503
+[]    \OT1/cmtt/m/n/8 Int ref a = r; (* OK because NonZero ref <: Int ref *)[] 
+ []
+
+
+Overfull \hbox (8.02016pt too wide) in paragraph at lines 503--503
+[]    \OT1/cmtt/m/n/8 return (42 / !r) (* OK because !r has type NonZero *)[] 
+ []
+
+<Bilder/dv_layout.png, id=284, 335.75438pt x 203.25937pt>
+File: Bilder/dv_layout.png Graphic file (type png)
+<use Bilder/dv_layout.png>
+Package pdftex.def Info: Bilder/dv_layout.png  used on input line 519.
+(pdftex.def)             Requested size: 144.53778pt x 87.49907pt.
+[4 <c:/Users/aless/OneDrive/Dokumente/ETH/5. Semester/Compiler Design/cd-cheatsheet/Bilder/dv_layout.png>] (c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `zusammenfassung.out' has not changed.
-(rerunfilecheck)             Checksum: 56788C2C816F82F2707E874418E3652D;2644.
+(rerunfilecheck)             Checksum: B9597B7AF1632C416812394A9F5DA659;5287.
  ) 
 Here is how much of TeX's memory you used:
- 24024 strings out of 479334
- 423617 string characters out of 2857085
- 753907 words of memory out of 3000000
- 40955 multiletter control sequences out of 15000+200000
- 424735 words of font info for 85 fonts, out of 3000000 for 9000
+ 24189 strings out of 479334
+ 426113 string characters out of 2857085
+ 755132 words of memory out of 3000000
+ 41037 multiletter control sequences out of 15000+200000
+ 427503 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,18n,89p,504b,524s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (2 pages, 224548 bytes).
+ 87i,18n,89p,504b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/public/hoekwater/stmary8.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/aless/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on "c:/Users\aless\OneDrive\Dokumente\ETH\5. Semester\Compiler Design\cd-cheatsheet\zusammenfassung.pdf" (4 pages, 469472 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 500000)
- 200 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 359 PDF objects out of 1000 (max. 8388607)
+ 128 named destinations out of 1000 (max. 500000)
+ 374 words of extra memory for PDF output out of 10000 (max. 10000000)
 

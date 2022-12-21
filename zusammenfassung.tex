@@ -118,7 +118,6 @@
 \begin{center}
      \Large{\textbf{Compiler Design - Cheatsheet}} \\
 \end{center}
-\section{Compiler Structure}
 \subsection{Simplified Compiler Structure}
 
 \begin{align*}
@@ -129,7 +128,7 @@
     &\underbrace{\text{Code Generation}}_{\text{Back End}}
 \end{align*}
 \subsection{Stack layout}
-\includegraphics[width = 0.1\textwidth]{Bilder/stack.png}
+\includegraphics[width = 0.2\textwidth]{Bilder/stack.png}
 \subsection{Suffiexes}
 \begin{enumerate}
     \item  q = quadword (4 words)
@@ -255,11 +254,7 @@ Generates scanning code that:
 \end{enumerate}
 \subsection{Implementation Strategies}
 We can use a finite automaton since one must exist for a regular expression.
-\includegraphics[width = 0.3\textwidth]{Bilder/rule1.png}
-\includegraphics[width = 0.2\textwidth]{Bilder/rule2.png}
-\includegraphics[width = 0.3\textwidth]{Bilder/rule3.png}
-\includegraphics[width = 0.3\textwidth]{Bilder/rule4.png}
-\includegraphics[width = 0.3\textwidth]{Bilder/rule5.png}
+\includegraphics[width = 0.3\textwidth]{Bilder/nfas.png}
 \subsection{DFA vs. NFA}
 DFA:
 \begin{enumerate}
@@ -273,7 +268,257 @@ NFA:
   \item Accepts an input if there exists a way to reach an accepting state
   \item Less obvious how to implement efficiently
 \end{enumerate}
-\newpage
+\subsection{Parsing}
+\textbf{Def.:} Finding Syntactic Structure \\
+\textbf{Limits of regular expressions}:
+\begin{enumerate}
+  \item DFA's have only finite \# of states (i.e., finite memory)
+  \item So, DFA's can't count
+\end{enumerate}
+Therefore we need something more powerful than DFA's.
+\subsection{CONTEXT FREE GRAMMARS}
+\textbf{Def. recursive:} $S$ mentions itself, e.g. $S \mapsto (S)S$
+A Context-free Grammar (CFG) consists of 
+\begin{enumerate}
+  \item A set of terminals (e.g., a lexical token, $\epsilon$ is not a terminal)
+  \item A set of nonterminals (e.g., S and other syntactic variables)
+  \item A designated nonterminal called the start symbol
+  \item A set of productions: $LHS \mapsto RHS$
+\end{enumerate}
+\textbf{single step:} For arbitrary strings $\alpha, \beta, \gamma$ and production rule $A \mapsto \beta$ a single step of the derivation is
+$\alpha A \gamma \mapsto \alpha \beta \gamma$ \\
+\textbf{ Parse Tree:} Leaves are terminals and Internal nodes are nonterminals.\\
+\subsection{Parse Trees to Abstract Syntax}
+\includegraphics[width = 0.3\textwidth]{Bilder/parse_tree_ast.png}
+\subsection{Derivation Orders}
+Productions of the grammar can be applied in any order. Both strategies (and any other) yield the \yellow{same} parse tree!
+\begin{enumerate}
+  \item Leftmost derivation: Find the left-most nonterminal and apply a production to it e.g. $S \mapsto \underline{\textbf{E}} + S$
+  \item Rightmost derivation: Find the right-most nonterminal and apply a production there e.g. $S \mapsto E + \underline{\textbf{S}}$
+\end{enumerate}
+\textbf{productive and nonproductive:} This grammar has nonterminal definitions that don't mention any terminal symbols.\\
+\textbf{finite:} There is a finite derivation starting from start symbol.\\
+\textbf{Example of right associative:} $S \mapsto E + S | E$, $E \mapsto \text{number} | ( S )$ \\
+\textbf{Example of Ambiguity:} $S \mapsto S + S | ( S ) | \text{number}$, accepts the same set of strings as the previous one
+but there are two leftmost derivations. Moreover, if there are multiple operations, ambiguity in the grammar
+leads to ambiguity in their precedence.\\
+\textbf{Eliminating Ambiguity:} 
+\begin{enumerate}
+  \item by adding nonterminals and allowing recursion only on the left (or right)
+  \item Higher-precedence operators go farther from the start symbol
+\end{enumerate}
+\textbf{Example of Eliminating Ambiguity:} $S \mapsto S + S | ( S ) | \text{number}$ becomes $S_0 \mapsto S_0 + S_1 | S_1$, 
+$S_1 \mapsto S_2 * S_1 | S_2$ and $S_2 \mapsto \text{number} | ( S_0 )$
+\subsection{LL(1) GRAMMARS}
+\textbf{Top-down:} Start from the start symbol (root of the parse tree), and go down. Not all grammars can be parsed "top-down" with a single lookahead. \\
+LL(1) means:
+\begin{enumerate}
+  \item \textbf{L}eft-to-right scanning
+  \item \textbf{L}eft-most derivation
+  \item \textbf{1} lookahead symbol
+\end{enumerate}
+\subsection{Making a grammar LL(1)}
+\textbf{Problem:} We can't decide which $S$ production to apply until we see the symbol after the first expression
+\textbf{Solution:} “Left-factor” the grammar. There is a common $S$ prefix for each choice, so add a new non-terminal $S'$ at the decision point.
+\includegraphics[width = 0.2\textwidth]{Bilder/left_factor.png}\\
+Also need to eliminate left-recursion.
+$\mathrm{S} \mapsto \mathrm{S} \alpha_1|\ldots| \mathrm{S} \alpha_n\left|\beta_1\right| \ldots \mid \beta_{\mathrm{m}}$ becomes
+$\mathrm{S} \mapsto \beta_1 S^{\prime}|\ldots| \beta_{\mathrm{m}} S^{\prime}$
+$S^{\prime} \mapsto \alpha_1 S^{\prime}|\ldots| \alpha_n S^{\prime} \mid \varepsilon$\\
+\includegraphics[width = 0.2\textwidth]{Bilder/elemination_left_rec.png}
+\subsection{Predictive Parsing}
+For a given nonterminal, the lookahead symbol uniquely determines the production to apply. Therefore we get a table 
+with $\text{nonterminal} \times \text{input token} \rightarrow \text{production}$
+\subsection{Construction of the parse table:}
+Consider a given production: $A \mapsto \gamma$. 
+\begin{enumerate}
+  \item (Case 1) Construct the set of all input tokens that may appear first in strings that can be derived from $\gamma$.
+  Add the production $\mapsto \gamma$ to the entry $(A,\text{token})$ for each such token.
+  \item (Case 2) If $\gamma$ can derive $\epsilon$ (the empty string), then we construct the set of all input tokens that may follow the nonterminal $A$ in the grammar.
+  Add the production $\mapsto \gamma$ to the entry $(A,\text{token})$ for each such token.
+\end{enumerate}
+\textbf{Example: }
+We have $T \mapsto S\$, S \mapsto ES', S' \mapsto e, S' \mapsto + S, E \mapsto \text{number} | ( S )$. We get
+\begin{enumerate}
+  \item First(S\$) = First(S) = First(E') = First(E) = \{ number, '(' \}
+  \item First($\epsilon$) = \{ $\epsilon$ \}
+  \item First($+$S) = \{ $+$ \}
+  \item First(number) = \{ number \}
+  \item First( (S) ) = \{ '(' \}
+  \item Follow(S') = Follow(S)
+  \item Follow(S) = \{ \$, ')' \} $\cup$ Follow(S')
+\end{enumerate}
+\includegraphics[width = 0.3\textwidth]{Bilder/parse_table_ll.png}
+\subsection{LR GRAMMARS}
+LR(k) parser
+\begin{enumerate}
+  \item Bottom-up Parsing
+  \item \textbf{L}eft-to-right scanning
+  \item \textbf{R}ightmost derivation
+  \item \textbf{k} lookahead symbols
+\end{enumerate}
+LR grammars are more expressive than LL. Can handle left-recursive (and right recursive) grammars.
+\subsection{Shift/Reduce Parsing}
+\textbf{Shift:} Move look-ahead token to the stack \\
+\textbf{Reduce:}: Replace symbols $\gamma$ at top of stack with nonterminal $X$ s.t. $X \mapsto \gamma$ is a production
+\includegraphics[width = 0.3\textwidth]{Bilder/shift_reduce.png}
+\textbf{LR(0) state:} items to track progress on possible upcoming reductions\\
+\textbf{LR(0) item:}  a production with an extra separator "." in the RHS, e.g. $S \mapsto .(L)$ or $S \mapsto (.L)$. Idea is
+stuff before the '.' is already on the stack and stuff after the '.' is what might be seen next. 
+\subsection{Constructing the DFA: Start state \& Closure}
+\begin{enumerate}
+  \item Start state of the DFA = empty stack, so it contains the item $S' \mapsto .S\$$
+  \item Closure of a state: Adds items for all productions whose LHS nonterminal occurs in an item in the state 
+  just after the '.' (e.g., $S$ in $S' \mapsto .S\$$). The added items have the '.' located at the beginning (no symbols for
+  those items have been added to the stack yet), e.g. CLOSURE$(\{S' \mapsto .S\$\}) = \{S' \mapsto .S\$, S \mapsto .(L), S \mapsto .\text{id}\}$
+  \item Next we add the transitions, e.g after reading id we get $S \mapsto \text{id}.$
+  \item Finally, for each new state, we take the closure
+  \item If a reduce state is reached, reduce otherwise, if the next token matches an outgoing edge, shift
+\end{enumerate}
+\includegraphics[width = 0.2\textwidth]{Bilder/dfa_lr.png}
+\subsection{Implementing the Parsing Table}
+Entries for the “action table” specify two kinds of actions: Shift and go to state n and Reduce using reduction $X \mapsto \gamma$.
+We only have reduction when we don't have any outgoing edges otherwise we shift.
+\includegraphics[width = 0.3\textwidth]{Bilder/parse_table_lr.png}
+\subsection{LR(0) Limitations}
+\textbf{shift/reduce:} $S \mapsto (L).$ and $L \mapsto .L, S$ yield a problem in a state since with $(L).$ we are allowed to reduce
+but with $.L$ we are also allowed to shift.
+\textbf{ reduce/reduce:} $S \mapsto L, S.$ and $S \mapsto ,S.$ yield a problem in a state since there exists two diffrent
+reduction rules for $S.$
+\subsection{LR(1) Parsing}
+\begin{enumerate}
+  \item LR(1) state = set of LR(1) items
+  \item An LR(1) item is an LR(0) item + a set of look-ahead symbols $A \mapsto \alpha.\beta, \mathcal{L}$
+\end{enumerate}
+\textbf{LR(1) closure:}
+\begin{enumerate}
+  \item Form the set of items just as for LR(0) algorithm
+  \item Whenever a new item $C \mapsto .\gamma$ is added because $A \mapsto \beta.C\delta, \mathcal{L}$ is
+  already in the set, we need to compute its look-ahead set $\mathcal{M}$ 
+  \begin{enumerate}
+    \item The look-ahead set $\mathcal{M}$  includes FIRST($\delta$) 
+    \item If $\delta$ is or can derive $\epsilon$, then the look-ahead $\mathcal{M}$ also contains $\mathcal{L}$
+  \end{enumerate} 
+\end{enumerate}
+\textbf{Example Closure:} Asume we have $S' \mapsto S\$, S \mapsto E + S | E, E \mapsto \text{number}|S$
+\begin{itemize}
+  \item Start item: $S' \mapsto S\$, \{\}$
+  \item Since $S$ is to the right of a '.', add $S \mapsto .E + S, \{\$\}; S \mapsto .E, \{\$\}$
+  \item Need to keep closing, since $E$ appears to the right of a '.' in '.E + S', $E \mapsto .\text{number}, \{+\}; E \mapsto .(S), \{+\}$
+  \item Because E also appears to the right of . in .E we get: $E \mapsto .\text{number}, \{\$\}; E \mapsto .(S), \{\$\}$
+  \item All items are distinct, so we’re done
+\end{itemize}
+\includegraphics[width = 0.1\textwidth]{Bilder/dfa_lr1.png} \\
+\textbf{Ambiguity with if else:} \begin{verbatim}
+  if (E1) if (E2) S1 else S2
+\end{verbatim}
+This is known as the \yellow{dangling else problem}. What should the right answer be?
+We know two solutions: the simple one would just require \{\} and another one could use the grammar
+\begin{enumerate}
+  \item $S \mapsto M | U$   // M = matched, U = unmatched
+  \item $U \mapsto$ if (E) S   // Unmatched if
+  \item $U \mapsto$ if (E) M else U  // Nested if is matched
+  \item $M \mapsto$ if (E) M else M // Matched if
+  \item $M \mapsto$ X = E  // Other statements
+\end{enumerate}
+\subsection{Lambda Calculus}
+The lambda calculus is a minimal programming language. It has variables, functions, and function application.
+It's Turing Complete. Concrete syntax:
+\begin{verbatim}
+  exp ::=
+      | x               //variables
+      | fun x -> exp    //functions
+      | exp1 exp2       //function application
+      | ( exp )         //parentheses
+\end{verbatim}
+The only values of the lambda calculus are (closed) functions that is val ::= fun x $\rightarrow$ exp.\\
+\textbf{substitute:} Replace all free occurrences of $x$ in $e$ by $v$ also written as $e\{v/\}$ If we try to substitute a
+variable which is not free, the expression remains the same.\\
+$\mathrm{x}\{\mathrm{v} / \mathrm{x}\} \quad=\mathrm{v} \quad$ (replace the free $x$ by $v$ )\\
+$y\{v / x\} \quad=y \quad$ (assuming $y \neq x$ )\\
+$($ fun $x\rightarrow\exp )\{v / x\} \quad=($ fun $x \rightarrow \exp ) \quad$ ( $x$ is bound in exp)\\
+$($ fun $y\rightarrow\exp )\{v / x\} \quad=($ fun $y\rightarrow \exp \{v / x\}) \quad$ (assuming $y \neq x$ )\\
+$\left(\mathrm{e}_1 \mathrm{e}_2\right)\{\mathrm{v} / \mathrm{x}\} \quad=\left(\mathrm{e}_1\{\mathrm{v} / \mathrm{x}\} \mathrm{e}_2\{\mathrm{v} / \mathrm{x}\}\right) \quad$ (substitute everywhere)\\
+\textbf{free variable:} We say variable x is free in fun y $\rightarrow$ x + y. Free variables are defined in an outer scope\\
+\textbf{bound variable:} We say variable y is bound by fun y. Its scope is the body x + y in fun y $\rightarrow$ x + y\\
+\textbf{closed:} A term with no free variables is called closed. \\
+\textbf{open:} A term with one or more free variables is called open.
+\textbf{Free Variable Calculation:}\\
+$fv(x) = \{x\}$ \\
+$fv(\operatorname{fun} x \rightarrow \exp) = fv(\exp) \backslash \{x\}$ \\
+$fv(\exp_1 \exp_2) = fv(\exp_1) \cup fv(\exp_2)$\\
+\textbf{Variable Capture:} In $(\operatorname{fun} x \rightarrow (x y)) \{(\operatorname{fun} z \rightarrow x) / y\} = \operatorname{fun} x \rightarrow (x (\operatorname{fun} z \rightarrow x))$
+$x$ is captured. Usually not the desired behavior. This property is sometimes called dynamic scoping. The meaning of $x$ is determined by where it is bound
+dynamically. \\
+\textbf{Alpha Equivalence:} Two terms that differ only by consistent renaming of bound variables are called alpha equivalent, e.g. $(\operatorname{fun} x \rightarrow y x)$ the same as $(\operatorname{fun} z \rightarrow y z)$\\
+\subsection{Operational Semantics}
+$\frac{}{v \Downarrow v}$ \\
+$\frac{\exp _1 \Downarrow\left(\text { fun } x\rightarrow \exp _3\right) \quad \exp _2 \Downarrow v \quad \exp _3\{v / x\} \Downarrow w}{\exp _1 \exp _2 \Downarrow w}$
+\subsection{Y Combinator \& Factorial}
+\textbf{Y combinator:} $Y = = \backslash f. (\backslash x. f (x\text{ }x)) (\backslash x. f (x \text{ }x))$. Y F = F (Y F) for any term F.
+\textbf{Example factorial function:}
+\begin{itemize}
+  \item Typical recursive definition: $fac = \backslash n. if (n=0) 1 (n * fac (n-1))$
+  \item Abstract it: $F = \backslash f. \backslash n. if (n=0) 1 (n * f(n-1))$
+  \item Thus, fac = F fac (i.e., fac is a fixpoint of F)
+  \item Y F being fixpoint of F can thus be viewed as the factorial function!
+\end{itemize}
+\subsection{CLOSURE CONVERSION}
+The closure is a pair of the environment and a code pointer: Code(env, y, body). We get 
+fun (env, y) $\rightarrow$ let x = nth env 0 in body, where y is possibly in body.\\
+\textbf{Array-based Closures with N-ary Functions:} 
+We have (fun (x y z) $\rightarrow$ (fun (n m) $\rightarrow$ (fun p $\rightarrow$ (fun q $\rightarrow$ n + z) x)))
+\includegraphics[width = 0.2\textwidth]{Bilder/closure_array_based.png}\\
+\textbf{Theorem: (simply typed lambda calculus with integers):} If $\vdash e : t$, then there exists a value $v$ such that $e \Downarrow v$ \\
+\textbf{Theorem: (Type Safety)} If $\vdash P : t$ is a well-typed program, then either
+\begin{enumerate}
+  \item the program terminates in a well-defined way, or
+  \item the program continues computing forever
+\end{enumerate}
+\textbf{type:} A type is just a predicate on the set of values in a system. E.g., the type int can be thought of as a boolean function that returns
+true on integers and false otherwise. Equivalently, we can think of a type as just a subset of all values.\\
+\textbf{subtype:} This subset relation gives rise to a subtype relation: if $Pos <: Int$, then Pos is a subtype of Int \\
+\textbf{LUB:} least upper bound, for statically unknown conditionals, we want the return value to be
+the LUB of the types of the branches. LUB is also called the join operation. \\
+subtyping relation is a \textbf{partial order}, that is:
+\begin{enumerate}
+  \item Reflexive: T <: T for any type T
+  \item Transitive: T1 <: T2 and T2 <: T3 then T1 <: T3
+  \item Antisymmetric: It T1 <: T2 and T2 <: T1 then T1 = T2
+\end{enumerate}
+\textbf{Soundness of Subtyping Relations:} A subtyping relation T1 <: T2 is sound if it approximates the underlying
+semantic subset relation, that is let be $\llbracket T \rrbracket=\{v \mid \vdash v: T\}$. If T1 <: T2 implies $\llbracket T1 \rrbracket \subseteq  \llbracket T2 \rrbracket$, then T1 <: T2 is sound.
+Whenever we have a sound subtyping relation, it follows that $\llbracket L U B\left(\mathrm{~T}_1, \mathrm{~T}_2\right) \rrbracket \supseteq \llbracket \mathrm{T}_1 \rrbracket \cup \llbracket \mathrm{T}_2 \rrbracket$.
+Using LUBs in the typing rules yields sound approximations of the program behavior (as if the IF-B rule)\\
+\textbf{Subsumption Rule:} $\frac{E \vdash e : T \quad  T <:  S}{E \vdash e : S}$\\
+\textbf{Subtyping for Function Types:} Need to convert an S1 to a T1 and T2 to S2, so the argument type is
+contravariant and the output type is covariant: $\frac{S1 <: T1 \quad T2 <: S2}{(T1 \rightarrow T2) <: (S1 \rightarrow S2)}$\\
+\textbf{reference types:} Are not covariant because of 
+\begin{verbatim}
+  Int bad(NonZero ref r) {
+    Int ref a = r; (* OK because NonZero ref <: Int ref *)
+    a := 0; (* OK because 0 : Zero <: Int *)
+    return (42 / !r) (* OK because !r has type NonZero *)
+  }
+\end{verbatim}
+and not contravariant because of 
+\begin{verbatim}
+  Assume: NonZero <: Int => ref Int <: ref NonZero
+  Int ref a;
+  a := 0;
+  NonZero ref b;
+  b = a;
+  return (1 / !b); 
+\end{verbatim}
+\textbf{Immutable Record Subtyping:} it holds $\{x:int, y :int\} \neq \{y:int, x:int\}$ and $\{x:int, y :int, z:int\} <: \{x:int, y :int\}$\\
+\textbf{Mutable Structures:} Mutable structures are invariant that is $T_1 ref <: T_2 ref \Longrightarrow T_1 = T_2$\\
+\textbf{Structural vs. Nominal Typing:} Checking against the name is nominal typing and checking against the structure is structural typing.
+\subsection{Compiling Objects}
+Objects contain a pointer to a dispatch vector (also called a virtual table or vtable) with pointers to method code \\
+\textbf{Single Inheritance:} every method has its own small integer index, Index is used to look up the method in the dispatch vector. Each interface and class gives rise to a dispatch vector layout. DV layout of new method is appended to the class which is being extended\\
+\includegraphics[width = 0.2\textwidth]{Bilder/dv_layout.png}\\
 
+
+\newpage
 \end{multicols}
 \end{document}
