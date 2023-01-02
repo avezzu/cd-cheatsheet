@@ -147,7 +147,7 @@ movq $SRC$, $DST$ = $DST \leftarrow SRC$ \\
      g (greater than) & (not ZF) and (SF $=$ OF)  \\ \hline
      l (less than) & SF $<>$ OF\\ \hline
      ge (greater or equal) & (SF $=$ OF)  \\ \hline
-     e (less than or equal) & SF $<>$ OF or Z  \\ \hline  
+     le (less than or equal) & SF $<>$ OF or Z  \\ \hline  
     \end{tabular}
   \end{center}
 \subsection{Addressing}
@@ -160,7 +160,11 @@ movq $SRC$, $DST$ = $DST \leftarrow SRC$ \\
     \end{tabular}
   \end{center}
 \subsection{leaq vs. movq}
-In leaq we just compute the address, in movq we dereference the address. \\
+In leaq we just compute the address, in movq we dereference the address.
+\subsection{cmp}
+cmpq $SRC1$, $SRC1$ = $SRC2 - SRC1$, flags are set compared to $SRC2$
+\subsection{Redzone}
+Is an area beyond the current stack frame, scratch pad for the callee's data.\\
 %\subsection{Callee vs. Caller saved}
 %Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
 %(Rbx, R12, R13, R14, R15) are saved by the called function. \\
@@ -348,7 +352,6 @@ We have $T \mapsto S\$, S \mapsto ES', S' \mapsto e, S' \mapsto + S, E \mapsto \
   \item Follow(S') = Follow(S)
   \item Follow(S) = \{ \$, ')' \} $\cup$ Follow(S')
 \end{enumerate}
-\includegraphics[width = 0.3\textwidth]{Bilder/parse_table_ll.png}
 \subsection{LR GRAMMARS}
 LR(k) parser
 \begin{enumerate}
@@ -375,11 +378,9 @@ stuff before the '.' is already on the stack and stuff after the '.' is what mig
   \item Finally, for each new state, we take the closure
   \item If a reduce state is reached, reduce otherwise, if the next token matches an outgoing edge, shift
 \end{enumerate}
-\includegraphics[width = 0.2\textwidth]{Bilder/dfa_lr.png}
 \subsection{Implementing the Parsing Table}
 Entries for the “action table” specify two kinds of actions: Shift and go to state n and Reduce using reduction $X \mapsto \gamma$.
 We only have reduction when we don't have any outgoing edges otherwise we shift.
-\includegraphics[width = 0.3\textwidth]{Bilder/parse_table_lr.png}
 \subsection{LR(0) Limitations}
 \textbf{shift/reduce:} $S \mapsto (L).$ and $L \mapsto .L, S$ yield a problem in a state since with $(L).$ we are allowed to reduce
 but with $.L$ we are also allowed to shift.
@@ -408,7 +409,6 @@ reduction rules for $S.$
   \item Because E also appears to the right of . in .E we get: $E \mapsto .\text{number}, \{\$\}; E \mapsto .(S), \{\$\}$
   \item All items are distinct, so we’re done
 \end{itemize}
-\includegraphics[width = 0.1\textwidth]{Bilder/dfa_lr1.png} \\
 \textbf{Ambiguity with if else:} \begin{verbatim}
   if (E1) if (E2) S1 else S2
 \end{verbatim}
@@ -583,7 +583,7 @@ redundant and can be eliminated\\
 Identify loops \& nesting structure in a CFG
 \begin{itemize}
 	\item A loop is a strongly connected component (head reachable from each node)
-	\item Concept of dominators: A dominates B = if the only way to reach B from start node is via A. A loop contains at least 1 back edge. (back edge = target dominates the source)
+	\item Concept of dominators: A dominates B = if the only way to reach B from start node is via A. A loop contains at least 1 back edge. (back edge = target dominates the source), for strictly dominance it must also hold $A \neq B$.
 	\item dom is transitive and anti-symmetric, can be computed as a forward dataflow analysis $in[n] = \bigcap_{n' \in pred[n]}out[n'], out[n] = in[n] \cup \{n\}, \bigsqcap = \cap$
 \end{itemize}
 \subsection{Single Static Assignment (SSA)}
@@ -593,17 +593,19 @@ Identify loops \& nesting structure in a CFG
   \item $\phi$ nodes can be placed at dominator tree join nodes
 	\item eliminate phi nodes after optmization
 \end{itemize}
-Algorithm For Computing Dominance Frontiers:
-\begin{verbatim}
-  for all nodes B
-    if #(pred[B]) >= 2             // (just an optimization)
-      for each p in pred[B] {
-        runner := p        // start at the predecessor of B
-        while (runner != doms[B])  // walk up the tree adding B
-          DF[runner] := DF[runner] union {B}
-          runner := doms[runner]
-      }
-\end{verbatim}
+\subsection{dominance frontier}
+$DF[X] = \{y | \exists M \rightarrow y \land (X \text{ dom } M) \land \lnot (X \text{ sdom } y) \}$
+%Algorithm For Computing Dominance Frontiers:
+%\begin{verbatim}
+%  for all nodes B
+%    if #(pred[B]) >= 2             // (just an optimization)
+%      for each p in pred[B] {
+%        runner := p        // start at the predecessor of B
+%        while (runner != doms[B])  // walk up the tree adding B
+%          DF[runner] := DF[runner] union {B}
+%          runner := doms[runner]
+%      }
+%\end{verbatim}
 \subsection{Garbage Collector}
 \begin{itemize}
 	\item Garbage: An object x is reachable iff a register contains a pointer to x or another reachable object y contains a pointer to x
@@ -612,16 +614,25 @@ Algorithm For Computing Dominance Frontiers:
 	
 	When memory runs out, GC executes two phases: mark phase: trace reachable objects; sweep phase: collects garbage objects (extra bit reserved for memory management)
 	
-	pointer reversal can be used to allow auxiliary data to be stored in the objects.
+	Pointer reversal enables a depth first traversal of the reachable objects without using additional memory. It maintains the “stack” in the objects themselves by storing pointers that
+  point back to their parents in already available memory. 
 	\item Stop and Copy
 	
 	Memory is organized into two areas: Old space (used for allocation), new space (use as a reserve for GC)
 	
 	When old space is full all reachable objects are moved, old and new are swapped.
+  Stop and Copy moves objects around. Pointers to those objects must also be updated.
+However, objects (structs) in C and C++ do not carry any metadata that identify which
+members are pointers and therefore it is impossible to properly update them. Even if the
+garbage collector had access to such information, a pointer can be converted to an integer
+and back, the collector cannot know the programmer’s intention and whether it should also
+update such integers.
 	\item Reference Counting
 	
-	Store number of references in the object itself, assignments modify that number. Cannot collect circular structures.
-	
+	Store number of references in the object itself, assignments modify that number. Cannot collect circular structures, since each cyclic structure member’s reference count can never drop below 1 (since another
+  member of the cycle points to it) even if none of them is reachable.
+	For each assignment, $x = y$ The reference count of y's pointer is increased by 1 and that one of x's pointer is decreased by 1.
+
 \end{itemize}
 \newpage
 \end{multicols}
