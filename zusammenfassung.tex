@@ -590,7 +590,7 @@ Identify loops \& nesting structure in a CFG
 \begin{itemize}
   \item \%uids on RHS of phi nodes can be defined “later” in CFG
   \item An alloca inst. is promotable if the address of the variable is not taken or is not passed by reference
-  \item $\phi$ nodes can be placed at dominator tree join nodes
+  \item $\phi$ nodes can be placed at dominator tree join nodes (There where $J[N] = DF_i[N] = DF_{i + 1}[N]$ (fixpoint) with $DF_{i + 1}[N] = DF[N \cup DF_i[N]]$ and $N$ as a set of nodes which modify the variable)
 	\item eliminate phi nodes after optmization
 \end{itemize}
 \subsection{dominance frontier}
