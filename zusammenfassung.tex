@@ -360,7 +360,7 @@ LR(k) parser
   \item \textbf{R}ightmost derivation
   \item \textbf{k} lookahead symbols
 \end{enumerate}
-LR grammars are more expressive than LL. Can handle left-recursive (and right recursive) grammars.
+LR grammars are more expressive than LL (even LR(0)). Can handle left-recursive (and right recursive) grammars.
 \subsection{Shift/Reduce Parsing}
 \textbf{Shift:} Move look-ahead token to the stack \\
 \textbf{Reduce:}: Replace symbols $\gamma$ at top of stack with nonterminal $X$ s.t. $X \mapsto \gamma$ is a production
@@ -512,7 +512,7 @@ and not contravariant because of
 \end{verbatim}
 \textbf{Immutable Record Subtyping:} it holds $\{x:int, y :int\} \neq \{y:int, x:int\}$ and $\{x:int, y :int, z:int\} <: \{x:int, y :int\}$\\
 \textbf{Mutable Structures:} Mutable structures are invariant that is $T_1 ref <: T_2 ref \Longrightarrow T_1 = T_2$\\
-\textbf{Structural vs. Nominal Typing:} Checking against the name is nominal typing and checking against the structure is structural typing.
+\textbf{Structural vs. Nominal Typing:} Checking against the name is nominal typing and checking against the structure is structural typing. (Does not matter if name is diffrent if the structure (context) is equal)
 \subsection{Compiling Objects}
 Objects contain a pointer to a dispatch vector (also called a virtual table or vtable) with pointers to method code \\
 \textbf{Single Inheritance:} every method has its own small integer index, Index is used to look up the method in the dispatch vector. Each interface and class gives rise to a dispatch vector layout. DV layout of new method is appended to the class which is being extended\\
@@ -562,32 +562,36 @@ end
 		\end{itemize}
 		\end{itemize}
 	  \textbf{Liveness:} backward, may $(out[n] = \bigcup_{n' \in succ[n]} in[n'], in[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = use[n], kill[n] = def[n]$\\
-		\textbf{Reaching Definition:} (for Constant and Copy propagation)forward, may $(in[n] = \bigcup_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = \{n\}, kill[n] = defs[a]\setminus \{n\}$\\
-		\textbf{Available Expressions:} forward (replace expression with res e.g. a = x + 1, b = x + 1 $\rightarrow$ b = a), must $(in[n] = \bigcap_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (out[n] \setminus kill[n])), gen[n] = \{n\} \setminus kill[n], kill[n] = uses[a]$\\
+		\textbf{Reaching Definition:} (for Constant and Copy propagation) forward, may $(in[n] = \bigcup_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (in[n] \setminus kill[n])), gen[n] = \{n\}, kill[n] = defs[a] \setminus \{n\}$\\
+		\textbf{Available Expressions:} forward (replace expression with res e.g. a = x + 1, b = x + 1 $\rightarrow$ b = a), must $(in[n] = \bigcap_{n' \in pred[n]} out[n'], out[n] = gen[n] \cup (in[n] \setminus kill[n])), gen[n] = \{n\} \setminus kill[n], kill[n] = uses[a]$\\
     \textbf{Very Busy Expressions:} Expression e is very busy at location p if every path from p
-    must evaluate e before any variable in e is redefined, background, must $(out[n] = \bigcap_{n' \in pred[n]} out[n'], in = gen union (out \setminus kill))$\\
+    must evaluate e before any variable in e is redefined, background, must $(out[n] = \bigcap_{n' \in pred[n]} out[n'], in = gen \cup (out \setminus kill))$\\
 		Key idea: Iterative solution of a system of equations over a lattice. Iteration terminates if flow functions are monotonic, equivalent to the MOP answer if flow functions distribute over meet
 \subsection{Register Allocation}
 \textbf{Linear-Scan Register:} Compute liveness information for each temp, try to use a reg if not possible than spill
 \begin{itemize}
 	\item Register Allocation: Compute liveness information for each temp, create an infereence graph, try to color the graph.
-	\item Kempe: 1. Find a node with degree < k and cut it out of the graph, 2. Recursively k-color the remaining subgraph, 3. When remaining graph is colored, there must be at least one free color available for the deleted node. If the graph cannot be colored we spill that node.
+	\item Kempe: 1. Find a node with degree $<$ k and cut it out of the graph, 2. Recursively k-color the remaining subgraph, 3. When remaining graph is colored, there must be at least one free color available for the deleted node. If the graph cannot be colored we spill that node.
 	\item Precolored nodes: Certain variables must be pre-assigned to registers (call, imul, caller-save registers)
 \end{itemize}
 \textbf{Coalescing Interference Graphs:} A more aggressive strategy is to coalesce nodes of the interference
 graph if they are connected by move-related edges (if t1 and t2 in movq t1, t2 can be assigned the same register (color)) this move is
 redundant and can be eliminated\\
-\textbf{Brigg's strategy:} It's safe to coalesce x \& y if the resulting node will have fewer than k neighbors that have degree >= k. \\
-\textbf{George's strategy:} We can safely coalesce x \& y if for every neighbor t of x, either t already interferes with y or t has degree < k.
+\textbf{Brigg's strategy:} It's safe to coalesce x \& y if the resulting node will have fewer than k neighbors that have degree $\geq$ k. \\
+\textbf{George's strategy:} We can safely coalesce x \& y if for every neighbor t of x, either t already interferes with y or t has degree $<$ k.
 \subsection{Loops}
 Identify loops \& nesting structure in a CFG
 \begin{itemize}
 	\item A loop is a strongly connected component (head reachable from each node)
+	\item \textbf{natural Loop:} for a back edge $n \rightarrow h:\{n' | h \text{ dom } n' \land n \text{ is reachable from }n' \text{ in }G \setminus \{h\}\} \cup h$
 	\item Concept of dominators: A dominates B = if the only way to reach B from start node is via A. A loop contains at least 1 back edge. (back edge = target dominates the source), for strictly dominance it must also hold $A \neq B$.
 	\item dom is transitive and anti-symmetric, can be computed as a forward dataflow analysis $in[n] = \bigcap_{n' \in pred[n]}out[n'], out[n] = in[n] \cup \{n\}, \bigsqcap = \cap$
 \end{itemize}
 \subsection{Single Static Assignment (SSA)}
 \begin{itemize}
+  \item loads at the end of each block
+  \item insert $\phi$-nodes at eack block
+  \item insert Stores after $\phi$ nodes
   \item \%uids on RHS of phi nodes can be defined “later” in CFG
   \item An alloca inst. is promotable if the address of the variable is not taken or is not passed by reference
   \item $\phi$ nodes can be placed at dominator tree join nodes (There where $J[N] = DF_i[N] = DF_{i + 1}[N]$ (fixpoint) with $DF_{i + 1}[N] = DF[N \cup DF_i[N]]$ and $N$ as a set of nodes which modify the variable)
@@ -625,7 +629,7 @@ $DF[X] = \{y | \exists M \rightarrow y \land (X \text{ dom } M) \land \lnot (X \
 However, objects (structs) in C and C++ do not carry any metadata that identify which
 members are pointers and therefore it is impossible to properly update them. Even if the
 garbage collector had access to such information, a pointer can be converted to an integer
-and back, the collector cannot know the programmer’s intention and whether it should also
+and back, the collector cannot know the programmer's intention and whether it should also
 update such integers.
 	\item Reference Counting
 	
