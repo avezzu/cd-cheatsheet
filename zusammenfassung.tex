@@ -128,7 +128,7 @@
     &\underbrace{\text{Code Generation}}_{\text{Back End}}
 \end{align*}
 \subsection{Stack layout}
-\includegraphics[width = 0.2\textwidth]{Bilder/stack.png}
+\includegraphics[width = 0.2\textwidth]{assets/stack.png}
 \subsection{Suffiexes}
 \begin{enumerate}
     \item  q = quadword (4 words)
@@ -165,63 +165,63 @@ In leaq we just compute the address, in movq we dereference the address.
 cmpq $SRC1$, $SRC1$ = $SRC2 - SRC1$, flags are set compared to $SRC2$
 \subsection{Redzone}
 Is an area beyond the current stack frame, scratch pad for the callee's data.\\
-%\subsection{Callee vs. Caller saved}
-%Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
-%(Rbx, R12, R13, R14, R15) are saved by the called function. \\
-%\subsection{Parameter} 
-%\begin{enumerate}
-%    \item $1 \dots 6$: rdi, rsi, rdx, rcx, r8, r9
-%    \item $7+$: on the stack (in right-to-left order), nth arg. $((n-7)+2) \cdot 8 + rbp$
-%\end{enumerate}
-%\subsection{Why Intermediate Representations?}
-%\begin{enumerate}
-%    \item resulting code quality is poor (direct translation)
-%    \item Richer source language features are hard to encode (Structured data types, Objects, \dots)
-%    \item hard to optimize
-%    \item Control-flow is not structured
-%\end{enumerate}
-%\subsection{Basic Blocks}
-%\begin{enumerate}
-%    \item Starts with a label that names the entry point of the basic block
-%    \item Ends with a control-flow instruction
-%    \item Contains no other control-flow instructions
-%    \item Contains no interior label used as a jump target
-%\end{enumerate}
-%\subsection{CFGs}
-%\begin{enumerate}
-%    \item Nodes are basic blocks
-%    \item There is a directed edge from node A to node B if the control flow
-%    instruction at the end of block A might jump to the label of block B
-%    \item No two blocks have the same label
-%\end{enumerate}
+\subsection{Callee vs. Caller saved}
+Caller saved register (Rdi, Rsi, Rdx, Rcx, R09, R08, Rax, R10, R11) are saved by the caller befor calling the function. Callee saved register 
+(Rbx, R12, R13, R14, R15) are saved by the called function. \\
+\subsection{Parameter} 
+\begin{enumerate}
+    \item $1 \dots 6$: rdi, rsi, rdx, rcx, r8, r9
+    \item $7+$: on the stack (in right-to-left order), nth arg. $((n-7)+2) \cdot 8 + rbp$
+\end{enumerate}
+\subsection{Why Intermediate Representations?}
+\begin{enumerate}
+    \item resulting code quality is poor (direct translation)
+    \item Richer source language features are hard to encode (Structured data types, Objects, \dots)
+    \item hard to optimize
+    \item Control-flow is not structured
+\end{enumerate}
+\subsection{Basic Blocks}
+\begin{enumerate}
+    \item Starts with a label that names the entry point of the basic block
+    \item Ends with a control-flow instruction
+    \item Contains no other control-flow instructions
+    \item Contains no interior label used as a jump target
+\end{enumerate}
+\subsection{CFGs}
+\begin{enumerate}
+    \item Nodes are basic blocks
+    \item There is a directed edge from node A to node B if the control flow
+    instruction at the end of block A might jump to the label of block B
+    \item No two blocks have the same label
+\end{enumerate}
 \subsection{getelementptr instruction}
 The first argument is always a type used as the basis for the calculations. 
 The second argument is always a pointer or a vector of pointers, 
 and is the base address to start from. The remaining arguments are indices 
 that indicate which of the elements of the aggregate object are indexed.
 \yellow{GEP never dereferences the address it's calculating}.
-%\begin{verbatim}
-%struct RT {
-%  char A;
-%  int B[10][20];
-%  char C;
-%};
-%struct ST {
-%  int X;
-%  double Y;
-%  struct RT Z;
-%};
-%
-%int *foo(struct ST *s) {
-%  return &s[1].Z.B[5][13];
-%}
-%\end{verbatim} 
-%is translated in:
-%\begin{verbatim}
-%    %arrayidx = getelementptr %struct.ST, ptr %s, i64 1, 
-%    i32 2, i32 1, i64 5, i64 13
-%    ret ptr %arrayidx
-%\end{verbatim}
+\begin{verbatim}
+struct RT {
+  char A;
+  int B[10][20];
+  char C;
+};
+struct ST {
+  int X;
+  double Y;
+  struct RT Z;
+};
+
+int *foo(struct ST *s) {
+  return &s[1].Z.B[5][13];
+}
+\end{verbatim} 
+is translated in:
+\begin{verbatim}
+    %arrayidx = getelementptr %struct.ST, ptr %s, i64 1, 
+    i32 2, i32 1, i64 5, i64 13
+    ret ptr %arrayidx
+\end{verbatim}
 \subsection*{Regular Expressions}
 Regular expressions precisely describe sets of strings. A regular expression R has one of the following forms:
 \begin{enumerate}
@@ -250,7 +250,7 @@ Most languages choose “longest match”.
   \item Each token has an attached “action” $A_i$ (just a piece of code to run
   when the regular expression is matched)  
 \end{enumerate}
-\includegraphics[width = 0.3\textwidth]{Bilder/lexer_generator.png}
+\includegraphics[width = 0.3\textwidth]{assets/lexer_generator.png}
 Generates scanning code that:
 \begin{enumerate}
   \item Decides whether the input is of the form $(R_1|\dots|R_n)^*$
@@ -258,7 +258,7 @@ Generates scanning code that:
 \end{enumerate}
 \subsection{Implementation Strategies}
 We can use a finite automaton since one must exist for a regular expression.
-\includegraphics[width = 0.3\textwidth]{Bilder/nfas.png}
+\includegraphics[width = 0.3\textwidth]{assets/nfas.png}
 \subsection{DFA vs. NFA}
 DFA:
 \begin{enumerate}
@@ -293,7 +293,7 @@ A Context-free Grammar (CFG) consists of
 $\alpha A \gamma \mapsto \alpha \beta \gamma$ \\
 \textbf{ Parse Tree:} Leaves are terminals and Internal nodes are nonterminals.\\
 %\subsection{Parse Trees to Abstract Syntax}
-%\includegraphics[width = 0.3\textwidth]{Bilder/parse_tree_ast.png}
+%\includegraphics[width = 0.3\textwidth]{assets/parse_tree_ast.png}
 \subsection{Derivation Orders}
 Productions of the grammar can be applied in any order. Both strategies (and any other) yield the \yellow{same} parse tree!
 \begin{enumerate}
@@ -324,12 +324,12 @@ LL(1) means:
 \subsection{Making a grammar LL(1)}
 \textbf{Problem:} We can't decide which $S$ production to apply until we see the symbol after the first expression
 \textbf{Solution:} “Left-factor” the grammar. There is a common $S$ prefix for each choice, so add a new non-terminal $S'$ at the decision point.
-\includegraphics[width = 0.2\textwidth]{Bilder/left_factor.png}\\
+\includegraphics[width = 0.2\textwidth]{assets/left_factor.png}\\
 Also need to eliminate left-recursion.
 $\mathrm{S} \mapsto \mathrm{S} \alpha_1|\ldots| \mathrm{S} \alpha_n\left|\beta_1\right| \ldots \mid \beta_{\mathrm{m}}$ becomes
 $\mathrm{S} \mapsto \beta_1 S^{\prime}|\ldots| \beta_{\mathrm{m}} S^{\prime}$
 $S^{\prime} \mapsto \alpha_1 S^{\prime}|\ldots| \alpha_n S^{\prime} \mid \varepsilon$\\
-\includegraphics[width = 0.2\textwidth]{Bilder/elemination_left_rec.png}
+\includegraphics[width = 0.2\textwidth]{assets/elemination_left_rec.png}
 \subsection{Predictive Parsing}
 For a given nonterminal, the lookahead symbol uniquely determines the production to apply. Therefore we get a table 
 with $\text{nonterminal} \times \text{input token} \rightarrow \text{production}$
@@ -364,7 +364,7 @@ LR grammars are more expressive than LL (even LR(0)). Can handle left-recursive 
 \subsection{Shift/Reduce Parsing}
 \textbf{Shift:} Move look-ahead token to the stack \\
 \textbf{Reduce:}: Replace symbols $\gamma$ at top of stack with nonterminal $X$ s.t. $X \mapsto \gamma$ is a production
-\includegraphics[width = 0.3\textwidth]{Bilder/shift_reduce.png}
+\includegraphics[width = 0.3\textwidth]{assets/shift_reduce.png}
 \textbf{LR(0) state:} items to track progress on possible upcoming reductions\\
 \textbf{LR(0) item:}  a production with an extra separator "." in the RHS, e.g. $S \mapsto .(L)$ or $S \mapsto (.L)$. Idea is
 stuff before the '.' is already on the stack and stuff after the '.' is what might be seen next. 
@@ -468,7 +468,7 @@ The closure is a pair of the environment and a code pointer: Code(env, y, body).
 fun (env, y) $\rightarrow$ let x = nth env 0 in body, where y is possibly in body.\\
 \textbf{Array-based Closures with N-ary Functions:} 
 We have (fun (x y z) $\rightarrow$ (fun (n m) $\rightarrow$ (fun p $\rightarrow$ (fun q $\rightarrow$ n + z) x)))
-\includegraphics[width = 0.2\textwidth]{Bilder/closure_array_based.png}\\
+\includegraphics[width = 0.2\textwidth]{assets/closure_array_based.png}\\
 \textbf{Theorem: (simply typed lambda calculus with integers):} If $\vdash e : t$, then there exists a value $v$ such that $e \Downarrow v$ \\
 \textbf{Theorem: (Type Safety)} If $\vdash P : t$ is a well-typed program, then either
 \begin{enumerate}
@@ -516,7 +516,7 @@ and not contravariant because of
 \subsection{Compiling Objects}
 Objects contain a pointer to a dispatch vector (also called a virtual table or vtable) with pointers to method code \\
 \textbf{Single Inheritance:} every method has its own small integer index, Index is used to look up the method in the dispatch vector. Each interface and class gives rise to a dispatch vector layout. DV layout of new method is appended to the class which is being extended\\
-\includegraphics[width = 0.2\textwidth]{Bilder/dv_layout.png}\\
+\includegraphics[width = 0.2\textwidth]{assets/dv_layout.png}\\
 \textbf{Multiple Inheritance:} Multiple Inheritance approaches: Allow multiple DV tables (C++) Choose which DV to use based on 
 static types, casting requires runtime operations; Use a level of indirection: Map method identifiers to code pointers 
 using a hash table, search up through the class hierarchy; Give up separate compilation: Now we have access to the whole class hierarchy. Use sparse dispatch vectors or 
@@ -599,17 +599,17 @@ Identify loops \& nesting structure in a CFG
 \end{itemize}
 \subsection{dominance frontier}
 $DF[X] = \{y | \exists M \rightarrow y \land (X \text{ dom } M) \land \lnot (X \text{ sdom } y) \}$
-%Algorithm For Computing Dominance Frontiers:
-%\begin{verbatim}
-%  for all nodes B
-%    if #(pred[B]) >= 2             // (just an optimization)
-%      for each p in pred[B] {
-%        runner := p        // start at the predecessor of B
-%        while (runner != doms[B])  // walk up the tree adding B
-%          DF[runner] := DF[runner] union {B}
-%          runner := doms[runner]
-%      }
-%\end{verbatim}
+Algorithm For Computing Dominance Frontiers:
+\begin{verbatim}
+  for all nodes B
+    if #(pred[B]) >= 2             // (just an optimization)
+      for each p in pred[B] {
+        runner := p        // start at the predecessor of B
+        while (runner != doms[B])  // walk up the tree adding B
+          DF[runner] := DF[runner] union {B}
+          runner := doms[runner]
+      }
+\end{verbatim}
 \subsection{Garbage Collector}
 \begin{itemize}
 	\item Garbage: An object x is reachable iff a register contains a pointer to x or another reachable object y contains a pointer to x
